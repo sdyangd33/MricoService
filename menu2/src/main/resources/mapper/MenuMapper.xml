@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.repository.MenuMapper">
+    <resultMap id="BaseResultMap" type="demo.entity.Menu">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="price" jdbcType="DOUBLE" property="price"/>
+        <result column="flavor" jdbcType="VARCHAR" property="flavor"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select id, name, price, flavor, tid
+        from t_menu limit #{index} , #{limit}
+    </select>
+
+    <select id="count" resultType="int">
+        select COUNT(*) from t_menu
+    </select>
+
+    <insert id="save" parameterType="demo.entity.Menu">
+        insert into t_menu(name,price,flavor) values(#{name},#{price},#{flavor})
+    </insert>
+</mapper>
